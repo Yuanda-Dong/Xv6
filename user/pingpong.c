@@ -7,17 +7,16 @@ int main(int argc, char *argv[]) {
     pipe(pair1);
     pipe(pair2);
 
-    if (fork() == 0){ // i'm child
-        read(pair1[0],(void *)0,1);
+    if (fork() == 0) { // i'm child
+        read(pair1[0], (void *)0, 1);
         printf("%d: received ping\n", getpid());
         write(pair2[1], "goodbye world", 1);
 
-    }else{ // i'm parent
-        write(pair1[1],"hello world",1);
-        read(pair2[0],(void *)0,1);
+    } else { // i'm parent
+        write(pair1[1], "hello world", 1);
+        read(pair2[0], (void *)0, 1);
         printf("%d: received pong\n", getpid());
     }
 
     return 0;
-
 }
