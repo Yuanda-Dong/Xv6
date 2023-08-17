@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
         }
         close(writing[1]);
         wait(0);
-        exit(0);
+    exit(0);
     }
     int p;
 jump:

@@ -14,7 +14,7 @@ _entry:
         csrr a1, mhartid
         addi a1, a1, 1
         mul a0, a0, a1
-        add sp, sp, a0
+        add sp, sp, a0 # stack pointer = start0 + 4096, the top of the stack, because stack grows down.
         # jump to start() in start.c
         call start
 spin:
