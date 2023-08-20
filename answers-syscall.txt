@@ -1,0 +1,5 @@
+usertrap
+7
+user mode
+lw	a3,0(zero), a3
+initcode 1
