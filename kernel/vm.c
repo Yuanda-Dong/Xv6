@@ -84,12 +84,15 @@ pte_t *walk(pagetable_t pagetable, uint64 va, int alloc) {
         if (*pte & PTE_V) {
             pagetable = (pagetable_t)PTE2PA(*pte);
         } else {
+            // If need alloc and alloc failed
             if (!alloc || (pagetable = (pde_t *)kalloc()) == 0)
                 return 0;
+            // either alloc=0 or alloc succeded
             memset(pagetable, 0, PGSIZE);
             *pte = PA2PTE(pagetable) | PTE_V;
         }
     }
+    // PX just returns the index into the current page table level.
     return &pagetable[PX(0, va)];
 }
 

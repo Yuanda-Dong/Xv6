@@ -161,6 +161,7 @@ pagetable_t proc_pagetable(struct proc *p) {
     pagetable_t pagetable;
 
     // An empty page table.
+    // NOTE it really is a table
     pagetable = uvmcreate();
     if (pagetable == 0)
         return 0;
