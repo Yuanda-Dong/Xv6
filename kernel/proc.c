@@ -169,6 +169,7 @@ static void freeproc(struct proc *p) {
 // Create a user page table for a given process, with no user memory,
 // but with trampoline and trapframe pages.
 pagetable_t proc_pagetable(struct proc *p) {
+
     pagetable_t pagetable;
 
     // An empty page table.
@@ -197,7 +198,8 @@ pagetable_t proc_pagetable(struct proc *p) {
 
     // map the userinfo page as USYSCALL with read-only access
     if (mappages(pagetable, USYSCALL, PGSIZE, (uint64)(p->userinfo),
-                 PTE_R) < 0) {
+                 PTE_R | PTE_U) < 0) {
+        uvmunmap(pagetable, TRAMPOLINE, 1, 0);
         uvmunmap(pagetable, USYSCALL, 1, 0);
         uvmfree(pagetable, 0);
         return 0;

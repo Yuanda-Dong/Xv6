@@ -114,6 +114,33 @@ uint64 walkaddr(pagetable_t pagetable, uint64 va) {
     return pa;
 }
 
+void printDepth(int depth){
+    for (int i = 0; i < depth-1; i++){
+        printf(".. ");
+    }
+    printf("..");
+}
+
+void vmprinthelper(pagetable_t pagetable, int depth){
+    for (int i = 0; i < 512; i++) {
+        pte_t pte = pagetable[i];
+        if ((pte & PTE_V) && (pte & (PTE_R | PTE_W | PTE_X)) == 0) {
+            printDepth(depth);
+            printf("%d: pte %p pa %p\n",i,pte,PTE2PA(pte));
+            uint64 child = PTE2PA(pte);
+            vmprinthelper((pagetable_t)child,depth + 1);
+        } else if (pte & PTE_V) {
+            printDepth(depth);
+            printf("%d: pte %p pa %p\n",i,pte,PTE2PA(pte));
+        }
+    }
+}
+
+void vmprint(pagetable_t pagetable){
+    printf("page table %p\n",pagetable);
+    vmprinthelper(pagetable, 1);
+}
+
 // add a mapping to the kernel page table.
 // only used when booting.
 // does not flush TLB or enable paging.
