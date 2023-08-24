@@ -66,23 +66,23 @@ uservec:
         sd t4, 264(a0)
         sd t5, 272(a0)
         sd t6, 280(a0)
+        # scratch has real a0, a0 has trapframe, and trapframe has saved all user registers, except a0
 
+        csrr t0, sscratch # t0 has real a0 
 	# save the user a0 in p->trapframe->a0
-        csrr t0, sscratch
         sd t0, 112(a0)
 
         # initialize kernel stack pointer, from p->trapframe->kernel_sp
-        ld sp, 8(a0)
+        ld sp, 8(a0) # sp points to kernal stack
 
         # make tp hold the current hartid, from p->trapframe->kernel_hartid
-        ld tp, 32(a0)
+        ld tp, 32(a0) # tp holds hartid
 
         # load the address of usertrap(), from p->trapframe->kernel_trap
-        ld t0, 16(a0)
-
+        ld t0, 16(a0) # t0 holds address of usertrap
 
         # fetch the kernel page table address, from p->trapframe->kernel_satp.
-        ld t1, 0(a0)
+        ld t1, 0(a0) # t1 holds kernal page table
 
         # wait for any previous memory operations to complete, so that
         # they use the user page table.
