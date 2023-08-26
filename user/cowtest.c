@@ -78,6 +78,7 @@ void threetest() {
             }
             for (char *q = p; q < p + (sz / 5) * 4; q += 4096) {
                 if (*(int *)q != getpid()) {
+                    printf("child\n");
                     printf("wrong content\n");
                     exit(-1);
                 }
@@ -100,6 +101,7 @@ void threetest() {
 
     for (char *q = p; q < p + sz; q += 4096) {
         if (*(int *)q != getpid()) {
+            printf("parent\n");
             printf("wrong content\n");
             exit(-1);
         }

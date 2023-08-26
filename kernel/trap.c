@@ -57,12 +57,39 @@ void usertrap(void) {
         syscall();
     } else if ((which_dev = devintr()) != 0) {
         // ok
+    } else if (r_scause() == 15) {
+        uint64 va = r_stval();
+        if (va >= MAXVA){
+            setkilled(p);
+            goto end;
+        }
+        pte_t *pte = walk(p->pagetable, va, 0);
+
+        // check if the page is a COW page if not just panic
+        // printf("page fault at %p\n", va);
+        if (!(*pte & PTE_C) || !(*pte & PTE_U) || !(*pte & PTE_V)) {
+            // panic("page fault when writing to a not COW page");
+            setkilled(p);
+            goto end;
+        }
+        if (*pte & PTE_U) {
+            uint64 Cpa = (uint64)kalloc();
+            if (Cpa == 0) {
+                panic("not enough memory\n");
+            }
+            uint64 Ppa = PTE2PA(*pte);
+            memmove((void *)Cpa, (void *)Ppa, 4096);
+            uint flags = (PTE_FLAGS(*pte) & ~PTE_C) | PTE_W;
+            uvmunmap(p->pagetable, PGROUNDDOWN(va), 1, 1);
+            mappages(p->pagetable, PGROUNDDOWN(va), 4096, Cpa, flags);
+            // refs[oldPa/4096] -= 1;
+        }
     } else {
         printf("usertrap(): unexpected scause %p pid=%d\n", r_scause(), p->pid);
         printf("            sepc=%p stval=%p\n", r_sepc(), r_stval());
         setkilled(p);
     }
-
+end:
     if (killed(p))
         exit(-1);
 

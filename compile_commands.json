@@ -1,0 +1,293 @@
+[
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -c -o kernel/entry.o kernel/entry.S",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/entry.S",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/entry.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/kalloc.o kernel/kalloc.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/kalloc.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/kalloc.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/string.o kernel/string.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/string.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/string.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/main.o kernel/main.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/main.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/main.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/vm.o kernel/vm.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/vm.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/vm.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/proc.o kernel/proc.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/proc.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/proc.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -c -o kernel/swtch.o kernel/swtch.S",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/swtch.S",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/swtch.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -c -o kernel/trampoline.o kernel/trampoline.S",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/trampoline.S",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/trampoline.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/trap.o kernel/trap.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/trap.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/trap.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/syscall.o kernel/syscall.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/syscall.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/syscall.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/sysproc.o kernel/sysproc.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/sysproc.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/sysproc.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/bio.o kernel/bio.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/bio.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/bio.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/fs.o kernel/fs.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/fs.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/fs.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/log.o kernel/log.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/log.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/log.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/sleeplock.o kernel/sleeplock.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/sleeplock.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/sleeplock.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/file.o kernel/file.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/file.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/file.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/pipe.o kernel/pipe.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/pipe.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/pipe.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/exec.o kernel/exec.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/exec.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/exec.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/sysfile.o kernel/sysfile.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/sysfile.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/sysfile.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -c -o kernel/kernelvec.o kernel/kernelvec.S",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/kernelvec.S",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/kernelvec.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/plic.o kernel/plic.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/plic.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/plic.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/virtio_disk.o kernel/virtio_disk.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/virtio_disk.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/virtio_disk.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/start.o kernel/start.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/start.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/start.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/console.o kernel/console.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/console.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/console.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/printf.o kernel/printf.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/printf.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/printf.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/uart.o kernel/uart.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/uart.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/uart.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c -o kernel/spinlock.o kernel/spinlock.c",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/spinlock.c",
+  "output": "/home/me/Dev/xv6-labs-2022/kernel/spinlock.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -march=rv64g -nostdinc -I. -Ikernel -c -o user/initcode.o user/initcode.S",
+  "file": "/home/me/Dev/xv6-labs-2022/user/initcode.S",
+  "output": "/home/me/Dev/xv6-labs-2022/user/initcode.o"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/types.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/types.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/param.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/param.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/memlayout.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/memlayout.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/spinlock.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/spinlock.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/riscv.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/riscv.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/defs.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/defs.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/elf.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/elf.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/fs.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/fs.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/proc.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/proc.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/syscall.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/syscall.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/sleeplock.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/sleeplock.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/buf.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/buf.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/stat.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/stat.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/file.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/file.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/fcntl.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/fcntl.h"
+},
+
+{
+  "directory": "/home/me/Dev/xv6-labs-2022",
+  "command": "/usr/bin/riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -gdwarf-2 -DSOL_SYSCALL -DLAB_SYSCALL -mcmodel=medany -ffreestanding -fno-common -mno-relax -I. -fno-stack-protector -fno-pie -c /home/me/Dev/xv6-labs-2022/kernel/virtio.h",
+  "file": "/home/me/Dev/xv6-labs-2022/kernel/virtio.h"
+}
+]

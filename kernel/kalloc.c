@@ -23,6 +23,8 @@ struct {
     struct run *freelist;
 } kmem;
 
+int refs[PHYSTOP/4096];
+
 void kinit() {
     initlock(&kmem.lock, "kmem");
     freerange(end, (void *)PHYSTOP);
@@ -68,7 +70,9 @@ void *kalloc(void) {
         kmem.freelist = r->next;
     release(&kmem.lock);
 
-    if (r)
+    if (r){
+        refs[(uint64)r / 4096] = 1;
         memset((char *)r, 5, PGSIZE); // fill with junk
+    }
     return (void *)r;
 }
