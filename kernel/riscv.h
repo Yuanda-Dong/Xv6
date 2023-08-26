@@ -57,7 +57,9 @@ static inline uint64 r_sip() {
     return x;
 }
 
-static inline void w_sip(uint64 x) { asm volatile("csrw sip, %0" : : "r"(x)); }
+static inline void w_sip(uint64 x) {
+    asm volatile("csrw sip, %0" : : "r"(x));
+}
 
 // Supervisor Interrupt Enable
 #define SIE_SEIE (1L << 9) // external
@@ -69,7 +71,9 @@ static inline uint64 r_sie() {
     return x;
 }
 
-static inline void w_sie(uint64 x) { asm volatile("csrw sie, %0" : : "r"(x)); }
+static inline void w_sie(uint64 x) {
+    asm volatile("csrw sie, %0" : : "r"(x));
+}
 
 // Machine-mode Interrupt Enable
 #define MIE_MEIE (1L << 11) // external
@@ -81,7 +85,9 @@ static inline uint64 r_mie() {
     return x;
 }
 
-static inline void w_mie(uint64 x) { asm volatile("csrw mie, %0" : : "r"(x)); }
+static inline void w_mie(uint64 x) {
+    asm volatile("csrw mie, %0" : : "r"(x));
+}
 
 // supervisor exception program counter, holds the
 // instruction address to which a return from
@@ -198,10 +204,14 @@ static inline uint64 r_time() {
 }
 
 // enable device interrupts
-static inline void intr_on() { w_sstatus(r_sstatus() | SSTATUS_SIE); }
+static inline void intr_on() {
+    w_sstatus(r_sstatus() | SSTATUS_SIE);
+}
 
 // disable device interrupts
-static inline void intr_off() { w_sstatus(r_sstatus() & ~SSTATUS_SIE); }
+static inline void intr_off() {
+    w_sstatus(r_sstatus() & ~SSTATUS_SIE);
+}
 
 // are device interrupts enabled?
 static inline int intr_get() {
@@ -223,7 +233,9 @@ static inline uint64 r_tp() {
     return x;
 }
 
-static inline void w_tp(uint64 x) { asm volatile("mv tp, %0" : : "r"(x)); }
+static inline void w_tp(uint64 x) {
+    asm volatile("mv tp, %0" : : "r"(x));
+}
 
 static inline uint64 r_ra() {
     uint64 x;

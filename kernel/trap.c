@@ -16,10 +16,14 @@ void kernelvec();
 
 extern int devintr();
 
-void trapinit(void) { initlock(&tickslock, "time"); }
+void trapinit(void) {
+    initlock(&tickslock, "time");
+}
 
 // set up to take exceptions and traps while in the kernel.
-void trapinithart(void) { w_stvec((uint64)kernelvec); }
+void trapinithart(void) {
+    w_stvec((uint64)kernelvec);
+}
 
 //
 // handle an interrupt, exception, or system call from user space.
@@ -59,7 +63,7 @@ void usertrap(void) {
         // ok
     } else if (r_scause() == 15) {
         uint64 va = r_stval();
-        if (va >= MAXVA){
+        if (va >= MAXVA) {
             setkilled(p);
             goto end;
         }

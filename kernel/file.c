@@ -19,7 +19,9 @@ struct {
     struct file file[NFILE];
 } ftable;
 
-void fileinit(void) { initlock(&ftable.lock, "ftable"); }
+void fileinit(void) {
+    initlock(&ftable.lock, "ftable");
+}
 
 // Allocate a file structure.
 struct file *filealloc(void) {

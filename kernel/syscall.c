@@ -48,12 +48,16 @@ static uint64 argraw(int n) {
 }
 
 // Fetch the nth 32-bit system call argument.
-void argint(int n, int *ip) { *ip = argraw(n); }
+void argint(int n, int *ip) {
+    *ip = argraw(n);
+}
 
 // Retrieve an argument as a pointer.
 // Doesn't check for legality, since
 // copyin/copyout will do that.
-void argaddr(int n, uint64 *ip) { *ip = argraw(n); }
+void argaddr(int n, uint64 *ip) {
+    *ip = argraw(n);
+}
 
 // Fetch the nth word-sized system call argument as a null-terminated string.
 // Copies into buf, at most max.

@@ -57,11 +57,11 @@ void itrunc(struct inode *ip);
 // ramdisk.c
 void ramdiskinit(void);
 void ramdiskintr(void);
-void ramdiskrw(struct buf * b);
+void ramdiskrw(struct buf *b);
 
 // kalloc.c
 void *kalloc(void);
-void kfree(void * pa);
+void kfree(void *pa);
 void kinit(void);
 
 // log.c
@@ -77,8 +77,8 @@ int piperead(struct pipe *pi, uint64 addr, int n);
 int pipewrite(struct pipe *pi, uint64 addr, int n);
 
 // printf.c
-void printf(char * fmt, ...);
-void panic(char * s) __attribute__((noreturn));
+void printf(char *fmt, ...);
+void panic(char *s) __attribute__((noreturn));
 void printfinit(void);
 
 // proc.c
@@ -108,7 +108,7 @@ int either_copyin(void *dst, int user_src, uint64 src, uint64 len);
 void procdump(void);
 
 // swtch.S
-void swtch(struct context * old, struct context * new);
+void swtch(struct context *old, struct context *new);
 
 // spinlock.c
 void acquire(struct spinlock *lk);
@@ -159,7 +159,8 @@ int uartgetc(void);
 void kvminit(void);
 void kvminithart(void);
 void kvmmap(pagetable_t kpgtbl, uint64 va, uint64 pa, uint64 sz, int perm);
-int mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa,int perm);
+int mappages(pagetable_t pagetable, uint64 va, uint64 size, uint64 pa,
+             int perm);
 pagetable_t uvmcreate(void);
 void uvmfirst(pagetable_t pagetable, uchar *src, uint sz);
 uint64 uvmalloc(pagetable_t pagetable, uint64 oldsz, uint64 newsz, int xperm);

@@ -6,7 +6,9 @@
 
 static char digits[] = "0123456789ABCDEF";
 
-static void putc(int fd, char c) { write(fd, &c, 1); }
+static void putc(int fd, char c) {
+    write(fd, &c, 1);
+}
 
 static void printint(int fd, int xx, int base, int sgn) {
     char buf[16];

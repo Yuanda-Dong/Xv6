@@ -51,7 +51,9 @@ pagetable_t kvmmake(void) {
 }
 
 // Initialize the one kernel_pagetable
-void kvminit(void) { kernel_pagetable = kvmmake(); }
+void kvminit(void) {
+    kernel_pagetable = kvmmake();
+}
 
 // Switch h/w page table register to the kernel's page table,
 // and enable paging.
@@ -286,7 +288,7 @@ int uvmcopy(pagetable_t old, pagetable_t new, uint64 sz) {
     uint flags;
 
     for (i = 0; i < sz; i += PGSIZE) {
-        if(i >= MAXVA){
+        if (i >= MAXVA) {
             return -1;
         }
         if ((pte = walk(old, i, 0)) == 0)
@@ -294,9 +296,9 @@ int uvmcopy(pagetable_t old, pagetable_t new, uint64 sz) {
         if ((*pte & PTE_V) == 0)
             panic("uvmcopy: page not present");
         pa = PTE2PA(*pte);
-        if (*pte & PTE_W){
+        if (*pte & PTE_W) {
             *pte = (*pte & ~PTE_W) | PTE_C;
-        }else{
+        } else {
             // *pte = (*pte & ~PTE_W);
             ;
         }
@@ -334,20 +336,20 @@ int copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len) {
         va0 = PGROUNDDOWN(dstva);
 
         pa0 = walkaddr(pagetable, va0);
-        if (pa0 == 0){
+        if (pa0 == 0) {
             return -1;
         }
-        if (va0 >= MAXVA){
+        if (va0 >= MAXVA) {
             return -1;
         }
         pte_t *pte = walk(pagetable, va0, 0);
         n = PGSIZE - (dstva - va0);
         if (n > len)
             n = len;
-        if(!(*pte & PTE_U)){
+        if (!(*pte & PTE_U)) {
             return -1;
         }
-        if(!(*pte & PTE_V)){
+        if (!(*pte & PTE_V)) {
             return -1;
         }
         if (*pte & PTE_C) {
