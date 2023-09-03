@@ -75,13 +75,14 @@ void thread_schedule(void) {
 
     if (current_thread != next_thread) { /* switch threads?  */
         next_thread->state = RUNNING;
+        // printf("Set %p to running\n",next_thread);
         t = current_thread;
         current_thread = next_thread;
         /* YOUR CODE HERE
          * Invoke thread_switch to switch from t to next_thread:
          * thread_switch(??, ??);
          */
-        printf("%p, %p \n", t, next_thread);
+        // printf("%p, %p \n", t, next_thread);
         // t->state = RUNNABLE;
         thread_switch((uint64)&t->context, (uint64)&next_thread->context);
 
@@ -101,11 +102,12 @@ void thread_create(void (*func)()) {
     t->state = RUNNABLE;
     // YOUR CODE HERE
     t->context.ra = (uint64)func;
-    t->context.sp = (uint64)t->stack;
+    t->context.sp = (uint64)t->stack + STACK_SIZE;
 }
 
 void thread_yield(void) {
     current_thread->state = RUNNABLE;
+    // printf("set %p to runnable\n",current_thread);
     thread_schedule();
 }
 
