@@ -90,25 +90,72 @@ void e1000_init(uint32 *xregs) {
     regs[E1000_IMS] = (1 << 7); // RXDW -- Receiver Descriptor Write Back
 }
 
+// NOTES
+// 1. Interact with memory-mapped control registers to detect when received
+// packets are available
+// 2. to inform E1000 that the driver has filled in some TX descriptors with
+// packets to send
+// 3. regs[E1000_RDT], regs[E1000_TDT] are the tail descriptor tails
+// 4.
+
 int e1000_transmit(struct mbuf *m) {
-    //
-    // Your code here.
+    // Notes:
+    // 1. place a pointer to the packet data in a descriptor in the TX ring.
+    // 2. need to ensure that each mbuf is eventually freed, but only after
+    // E1000 has finished transmitting the packet, (E1000_TXD_STAT_DD in the
+    // descriptor indicates this)
     //
     // the mbuf contains an ethernet frame; program it into
     // the TX descriptor ring so that the e1000 sends it. Stash
     // a pointer so that it can be freed after sending.
     //
-
+    acquire(&e1000_lock); 
+    uint32 idx = regs[E1000_TDT];
+    struct tx_desc* tx_desc = &tx_ring[idx];
+    if ((tx_desc->status & E1000_TXD_STAT_DD) == 0) {
+        release(&e1000_lock); 
+        return -1;
+    }
+    if (tx_mbufs[idx]) {
+        mbuffree(tx_mbufs[idx]);
+    }
+    tx_desc->addr = (uint64)m->head;
+    tx_desc->length = m->len;
+    tx_desc->cmd = E1000_TXD_CMD_EOP | E1000_TXD_CMD_RS;
+    tx_mbufs[idx] = m;
+    regs[E1000_TDT] = (idx + 1) % TX_RING_SIZE;
+    release(&e1000_lock); 
     return 0;
 }
 
 static void e1000_recv(void) {
-    //
-    // Your code here.
+    // Notes:
+    // 1. When E1000 receive each packet from the ethernet, it DMAs the packet
+    // to the memory pointed to by addr in the next RX ring descriptor.
+    // 2. E1000 asks the PLIC to deliver an interrupt as soon as interupts are
+    // enabled.
+    // 3. must scan the RX ring and deliver each new packet's mbuf to the
+    // network stack by calling net_rx()
+    // 4. Need to allocate a new mbuf and place it into the descriptor, so that
+    // when E1000 reaches that point in the RX ring again it finds a fresh
+    // buffer into which to DMA a new packet.
     //
     // Check for packets that have arrived from the e1000
     // Create and deliver an mbuf for each packet (using net_rx()).
     //
+    while (1) {
+        uint32 idx = (regs[E1000_RDT] + 1) % RX_RING_SIZE;
+        struct rx_desc* rx_desc = &rx_ring[idx];
+        if ((rx_desc->status & E1000_RXD_STAT_DD) == 0) {
+            break;
+        }
+        rx_mbufs[idx]->len = rx_desc->length;
+        net_rx(rx_mbufs[idx]);
+        rx_mbufs[idx] = mbufalloc(0);
+        rx_desc->addr = (uint64) rx_mbufs[idx]->head;
+        rx_desc->status = 0;
+        regs[E1000_RDT] = idx;
+    }
 }
 
 void e1000_intr(void) {

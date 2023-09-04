@@ -101,7 +101,7 @@ timervec:
         csrrw a0, mscratch, a0
         sd a1, 0(a0)
         sd a2, 8(a0)
-        sd a3, 16(a0)
+        sd a3, 16(a0) // saves a1,a2,a3 in mscracth
 
         # schedule the next timer interrupt
         # by adding interval to mtimecmp.
@@ -109,14 +109,14 @@ timervec:
         ld a2, 32(a0) # interval
         ld a3, 0(a1)
         add a3, a3, a2
-        sd a3, 0(a1)
+        sd a3, 0(a1) // sets up a1, a2, a3 for machine mode 
 
         # arrange for a supervisor software interrupt
         # after this handler returns.
         li a1, 2
-        csrw sip, a1
+        csrw sip, a1 // sip = 2
 
-        ld a3, 16(a0)
+        ld a3, 16(a0)// restore a1, a2, a3
         ld a2, 8(a0)
         ld a1, 0(a0)
         csrrw a0, mscratch, a0
