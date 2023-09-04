@@ -18,9 +18,10 @@ void initsleeplock(struct sleeplock *lk, char *name) {
 
 void acquiresleep(struct sleeplock *lk) {
     acquire(&lk->lk);
-    while (lk->locked) {
+    while (lk->locked) { // checks sleep lock while holding spin lock
         sleep(lk, &lk->lk);
     }
+    // holds the spin lock and sleep lock
     lk->locked = 1;
     lk->pid = myproc()->pid;
     release(&lk->lk);

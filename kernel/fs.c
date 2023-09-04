@@ -190,10 +190,10 @@ struct inode *ialloc(uint dev, short type) {
     struct dinode *dip;
 
     for (inum = 1; inum < sb.ninodes; inum++) {
-        bp = bread(dev, IBLOCK(inum, sb));
-        dip = (struct dinode *)bp->data + inum % IPB;
+        bp = bread(dev, IBLOCK(inum, sb)); // `buf` pointer
+        dip = (struct dinode *)bp->data + inum % IPB; // IPB = inodes per block, dip is the inum'th inode 
         if (dip->type == 0) { // a free inode
-            memset(dip, 0, sizeof(*dip));
+            memset(dip, 0, sizeof(*dip)); // clears dip
             dip->type = type;
             log_write(bp); // mark it allocated on the disk
             brelse(bp);

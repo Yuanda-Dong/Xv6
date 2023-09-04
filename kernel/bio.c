@@ -115,7 +115,7 @@ void brelse(struct buf *b) {
     if (b->refcnt == 0) {
         // no one is waiting for it.
         b->next->prev = b->prev;
-        b->prev->next = b->next;
+        b->prev->next = b->next;  // remove b
         b->next = bcache.head.next;
         b->prev = &bcache.head;
         bcache.head.next->prev = b;
