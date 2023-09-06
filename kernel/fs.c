@@ -352,9 +352,9 @@ void iunlockput(struct inode *ip) {
 // Return the disk block address of the nth block in inode ip.
 // If there is no such block, bmap allocates one.
 // returns 0 if out of disk space.
-static uint bmap(struct inode *ip, uint bn) {
+static uint bmap(struct inode *ip, uint bn) { // file's logical block number -> disk block number
     uint addr, *a;
-    struct buf *bp;
+    struct buf *bp, *bp2;
 
     if (bn < NDIRECT) {
         if ((addr = ip->addrs[bn]) == 0) {
@@ -388,6 +388,39 @@ static uint bmap(struct inode *ip, uint bn) {
         return addr;
     }
 
+    bn -= NINDIRECT;
+    if (bn < NDBINDIRECT) {
+        // printf("im here\n");
+        if ((addr = ip->addrs[NDIRECT+1]) == 0) {
+            addr = balloc(ip->dev);
+            if (addr == 0)
+                return 0;
+            ip->addrs[NDIRECT+1] = addr;
+        }
+        bp = bread(ip->dev, addr); // bp is addr13
+        a = (uint *)bp->data; 
+        if ((addr = a[bn/256]) == 0) {
+            addr = balloc(ip->dev); 
+            if (addr) {
+                a[bn/256] = addr;
+                log_write(bp);
+            }
+        }
+        bp2 = bread(ip->dev, addr);
+        a = (uint *)bp2->data; 
+        if ((addr = a[bn%256]) == 0) {
+            addr = balloc(ip->dev);
+            if (addr) {
+                a[bn%256] = addr;
+                log_write(bp2);
+            }
+        }
+        brelse(bp);
+        brelse(bp2);
+        return addr;
+    }
+    printf("%d, %d\n",bn, NDBINDIRECT);
+
     panic("bmap: out of range");
 }
 
@@ -395,8 +428,8 @@ static uint bmap(struct inode *ip, uint bn) {
 // Caller must hold ip->lock.
 void itrunc(struct inode *ip) {
     int i, j;
-    struct buf *bp;
-    uint *a;
+    struct buf *bp,*bp2;
+    uint *a, *b;
 
     for (i = 0; i < NDIRECT; i++) {
         if (ip->addrs[i]) {
@@ -411,6 +444,26 @@ void itrunc(struct inode *ip) {
         for (j = 0; j < NINDIRECT; j++) {
             if (a[j])
                 bfree(ip->dev, a[j]);
+        }
+        brelse(bp);
+        bfree(ip->dev, ip->addrs[NDIRECT]);
+        ip->addrs[NDIRECT] = 0;
+    }
+
+    if (ip->addrs[NDIRECT+1]) {
+        bp = bread(ip->dev, ip->addrs[NDIRECT+1]);
+        a = (uint *)bp->data;
+        for (j = 0; j < NINDIRECT; j++) {
+            if (a[j]){
+                bp2 = bread(ip->dev, a[j]);
+                b = (uint*) bp2->data;
+                for (int k = 0; k < NINDIRECT; k++){
+                    if (b[k])
+                        bfree(ip->dev,b[k]);
+                }
+                brelse(bp2);
+            }
+            bfree(ip->dev, a[j]);
         }
         brelse(bp);
         bfree(ip->dev, ip->addrs[NDIRECT]);
@@ -634,11 +687,13 @@ static struct inode *namex(char *path, int nameiparent, char *name) {
     return ip;
 }
 
+// returns the inode corresponding to path
 struct inode *namei(char *path) {
     char name[DIRSIZ];
     return namex(path, 0, name);
 }
 
+// returns the inode corresponding to the second last path element, sets name to the final path element
 struct inode *nameiparent(char *path, char *name) {
     return namex(path, 1, name);
 }

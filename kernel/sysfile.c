@@ -114,26 +114,30 @@ uint64 sys_link(void) {
         return -1;
 
     begin_op();
-    if ((ip = namei(old)) == 0) {
+    if ((ip = namei(old)) == 0) { // gets the inode old, calls iget
         end_op();
         return -1;
     }
 
-    ilock(ip);
-    if (ip->type == T_DIR) {
-        iunlockput(ip);
+    ilock(ip);               // locks the inode, reads from disk if necessary.
+    if (ip->type == T_DIR) { // if old inode is a directory, then we are done
+        iunlockput(ip);      // unlock then put, iput must be called inside a
+                             // trasaction, iunlock must be called before iput
         end_op();
         return -1;
     }
 
     ip->nlink++;
     iupdate(ip);
-    iunlock(ip);
+    iunlock(ip); // unlocks ip, but haven't put yet, so we has a ref to ip, but
+                 // can't modify it.
 
-    if ((dp = nameiparent(new, name)) == 0)
+    if ((dp = nameiparent(new, name)) == 0) // new = , name = ,
         goto bad;
-    ilock(dp);
-    if (dp->dev != ip->dev || dirlink(dp, name, ip->inum) < 0) {
+    ilock(dp); // locks dp
+    if (dp->dev != ip->dev || dirlink(dp, name, ip->inum) <
+                                  0) { // dirlink does the real work, put (name,
+                                       // ip->inum) in the content block of dp
         iunlockput(dp);
         goto bad;
     }
@@ -285,6 +289,7 @@ uint64 sys_open(void) {
     struct file *f;
     struct inode *ip;
     int n;
+    int count = 0;
 
     argint(1, &omode);
     if ((n = argstr(0, path, MAXPATH)) < 0)
@@ -298,7 +303,16 @@ uint64 sys_open(void) {
             end_op();
             return -1;
         }
-    } else {
+    }
+    // else if (omode & O_NOFOLLOW){
+    //     ip = namei(path);
+    //     if (ip == 0) {
+    //         end_op();
+    //         return -1;
+    //     }
+    // }
+    else { // not creating the file
+    repeat:
         if ((ip = namei(path)) == 0) {
             end_op();
             return -1;
@@ -308,6 +322,16 @@ uint64 sys_open(void) {
             iunlockput(ip);
             end_op();
             return -1;
+        } else if (ip->type == T_SYMLINK && !(omode & O_NOFOLLOW)) {
+            readi(ip, 0, (uint64)path, 0, MAXPATH);
+            printf("opening %s\n",path);
+            iunlockput(ip);
+            count += 1;
+            if (count > 10){
+                end_op();
+                return -1;
+            }
+            goto repeat;
         }
     }
 
@@ -468,5 +492,27 @@ uint64 sys_pipe(void) {
         fileclose(wf);
         return -1;
     }
+    return 0;
+}
+
+uint64 sys_symlink(void) {
+    char new[MAXPATH], old[MAXPATH];
+    struct inode *ip;
+    int n;
+
+    if ((n = argstr(0, old, MAXPATH)) < 0 || argstr(1, new, MAXPATH) < 0)
+        return -1;
+    printf("tried to create symlink %s -> %s\n", new, old);
+
+    begin_op();
+    ip = create(new, T_SYMLINK, 1, 1);
+    if (ip == 0){
+        end_op();
+        return -1;
+    }
+    n = writei(ip, 0, (uint64)old, 0, MAXPATH);
+    printf("wrote %d bytes\n", n);
+    iunlockput(ip);
+    end_op();
     return 0;
 }
